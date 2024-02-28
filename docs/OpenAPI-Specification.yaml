@@ -1,0 +1,136 @@
+openapi: 3.0.0
+info:
+  title: Grocery Booking API
+  version: 1.0.0
+
+paths:
+  /admin/groceries:
+    post:
+      summary: Add new grocery items to the system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              groceries:
+                - name: "ItemName1"
+                  price: 10.99
+                  quantity: 100
+                - name: "ItemName2"
+                  price: 15.99
+                  quantity: 50
+      responses:
+        "201":
+          description: Grocery item added successfully
+        "400":
+          description: Bad request, check input data
+
+    get:
+      summary: View existing grocery items
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              example:
+                groceries:
+                  - id: 1
+                    name: "ItemName1"
+                    price: 10.99
+                    quantity: 100
+                  - id: 2
+                    name: "ItemName2"
+                    price: 15.99
+                    quantity: 50
+    delete:
+      summary: Remove grocery items from the system
+      parameters:
+        - name: groceryIds
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: integer
+      responses:
+        "204":
+          description: Grocery items removed successfully
+        "400":
+          description: Bad request, check input data
+    put:
+      summary: Update details (e.g., name, price) of existing grocery items
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              groceries:
+                - id: 1
+                  name: "UpdatedItemName1"
+                  price: 12.99
+                - id: 2
+                  name: "UpdatedItemName2"
+                  price: 15.99
+      responses:
+        "200":
+          description: Grocery items updated successfully
+        "400":
+          description: Bad request, check input data
+
+  /admin/inventory:
+    put:
+      summary: Manage inventory levels of grocery items
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              groceries:
+                - id: 1
+                  quantity: 150
+                - id: 2
+                  quantity: 200
+      responses:
+        "200":
+          description: Inventory levels updated successfully
+        "400":
+          description: Bad request, check input data
+
+  /user/groceries:
+    get:
+      summary: View the list of available grocery items
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              example:
+                groceries:
+                  - id: 1
+                    name: "ItemName1"
+                    price: 10.99
+                  - id: 2
+                    name: "ItemName2"
+                    price: 15.99
+                  - id: 3
+                    name: "ItemName3"
+                    price: 8.99
+
+  /user/orders:
+    post:
+      summary: Book multiple grocery items in a single order
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              groceries:
+                - id: 1
+                  quantity: 3
+                - id: 2
+                  quantity: 2
+      responses:
+        "201":
+          description: Order placed successfully
+        "400":
+          description: Bad request, check input data
