@@ -6,6 +6,8 @@ info:
 paths:
   /admin/groceries:
     post:
+      tags:
+        - Admin
       summary: Add new grocery items to the system
       requestBody:
         required: true
@@ -20,15 +22,17 @@ paths:
                   price: 15.99
                   quantity: 50
       responses:
-        "201":
+        '201':
           description: Grocery item added successfully
-        "400":
+        '400':
           description: Bad request, check input data
 
     get:
+      tags:
+        - Admin
       summary: View existing grocery items
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -43,6 +47,8 @@ paths:
                     price: 15.99
                     quantity: 50
     delete:
+      tags:
+        - Admin
       summary: Remove grocery items from the system
       parameters:
         - name: groceryIds
@@ -53,17 +59,19 @@ paths:
             items:
               type: integer
       responses:
-        "204":
+        '204':
           description: Grocery items removed successfully
-        "400":
+        '400':
           description: Bad request, check input data
     put:
+      tags:
+        - Admin
       summary: Update details (e.g., name, price) of existing grocery items
       requestBody:
         required: true
         content:
           application/json:
-            example:
+            example: 
               groceries:
                 - id: 1
                   name: "UpdatedItemName1"
@@ -72,35 +80,40 @@ paths:
                   name: "UpdatedItemName2"
                   price: 15.99
       responses:
-        "200":
+        '200':
           description: Grocery items updated successfully
-        "400":
+        '400':
           description: Bad request, check input data
 
+  
   /admin/inventory:
     put:
+      tags:
+        - Admin
       summary: Manage inventory levels of grocery items
       requestBody:
         required: true
         content:
           application/json:
-            example:
+            example: 
               groceries:
                 - id: 1
                   quantity: 150
                 - id: 2
                   quantity: 200
       responses:
-        "200":
+        '200':
           description: Inventory levels updated successfully
-        "400":
+        '400':
           description: Bad request, check input data
 
   /user/groceries:
     get:
+      tags:
+        - User
       summary: View the list of available grocery items
       responses:
-        "200":
+        '200':
           description: Successful response
           content:
             application/json:
@@ -118,6 +131,8 @@ paths:
 
   /user/orders:
     post:
+      tags:
+        - User
       summary: Book multiple grocery items in a single order
       requestBody:
         required: true
@@ -130,7 +145,7 @@ paths:
                 - id: 2
                   quantity: 2
       responses:
-        "201":
+        '201':
           description: Order placed successfully
-        "400":
+        '400':
           description: Bad request, check input data

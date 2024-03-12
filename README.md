@@ -9,7 +9,9 @@ QuestionPro - Technical Assessment Submission
 ## Solution:
 
 <b> Database schema and Tables: </b>
+
 [![DB Schema](./docs/schema.png)]()
 
 <b> API Endpoints: </b>
+
 [![OpenAPI](./docs/openapi-spec.png)]()
